@@ -20,11 +20,6 @@ export default {
     head() {
         return {
             title: this.home.title,
-            script: [{
-                src: "https://maps.googleapis.com/maps/api/js?key=AIzaSyABW_v1PfR4afDuTbV4-dPQeXLdgosYL_o&libraries=places",
-                hid: "map",
-                defer: true,
-            }]
         }
     },
     data() {
@@ -33,14 +28,7 @@ export default {
         }
     },
     mounted() {
-        const mapOptions = {
-            zoom: 18,
-            center: new window.google.maps.LatLng(this.home._geoloc.lat, this.home._geoloc.lng)
-        }
-        const map = new window.google.maps.Map(this.$refs.map, mapOptions)
-        const position = new window.google.maps.LatLng(this.home._geoloc.lat, this.home._geoloc.lng)
-        const marker = new window.google.maps.Marker({ position })
-        marker.setMap(map)
+        this.$maps.showMap(this.$refs.map, this.home._geoloc.lat, this.home._geoloc.lng)
     },
     created() {
         const home = homes.find(
